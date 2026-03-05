@@ -1,0 +1,32 @@
+package com.teste.acdnb.core.domain.shared.valueobject;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.teste.acdnb.core.application.exception.InvalidDataException;
+
+import java.util.regex.Pattern;
+
+public class NomeSocial {
+    private String value;
+
+    private static final Pattern pattern = Pattern.compile("^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$");
+
+    private NomeSocial(String value) { this.value = value; }
+
+    @JsonCreator
+    public static NomeSocial of(@JsonProperty("value") String value, @JsonProperty("nome") String nome) {
+        if(value==null || value.isBlank()) {
+            return null;
+        }
+
+        if(!pattern.matcher(value).matches() || value.equalsIgnoreCase(nome)) {
+            throw new InvalidDataException("Nome Social inválido");
+        }
+
+        return new NomeSocial(value);
+    }
+
+    public String getValue() {
+        return value;
+    }
+}

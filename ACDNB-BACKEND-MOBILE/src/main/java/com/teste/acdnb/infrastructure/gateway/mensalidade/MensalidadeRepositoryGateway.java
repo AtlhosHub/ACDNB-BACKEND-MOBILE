@@ -1,0 +1,114 @@
+package com.teste.acdnb.infrastructure.gateway.mensalidade;
+
+import com.teste.acdnb.core.application.gateway.mensalidade.MensalidadeGateway;
+import com.teste.acdnb.core.domain.aluno.Aluno;
+import com.teste.acdnb.core.domain.mensalidade.Mensalidade;
+import com.teste.acdnb.core.domain.mensalidade.enums.StatusPagamento;
+import com.teste.acdnb.core.application.usecase.mensalidade.dto.RelatorioMensalidade;
+import com.teste.acdnb.infrastructure.filter.FiltroMensalidadeDTO;
+import com.teste.acdnb.infrastructure.filter.ListarAlunosMensalidadeFilter;
+import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entityMapper.AlunoEntityMapper;
+import com.teste.acdnb.infrastructure.persistence.jpa.aluno.specification.MensalidadeSpecification;
+import com.teste.acdnb.infrastructure.persistence.jpa.mensalidade.MensalidadeEntity;
+import com.teste.acdnb.infrastructure.persistence.jpa.mensalidade.MensalidadeEntityMapper;
+import com.teste.acdnb.infrastructure.persistence.jpa.mensalidade.MensalidadeRepository;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+@Component("mensalidadeRepositoryGateway")
+public class MensalidadeRepositoryGateway implements MensalidadeGateway {
+    private final MensalidadeRepository mensalidadeRepository;
+    private final MensalidadeEntityMapper mensalidadeEntityMapper;
+
+    public MensalidadeRepositoryGateway(MensalidadeRepository mensalidadeRepository, MensalidadeEntityMapper mensalidadeEntityMapper) {
+        this.mensalidadeRepository = mensalidadeRepository;
+        this.mensalidadeEntityMapper = mensalidadeEntityMapper;
+    }
+
+    @Override
+    public void salvarTodas(List<Mensalidade> mensalidades) {
+        mensalidadeRepository.saveAll(MensalidadeEntityMapper.toEntityList(mensalidades));
+    }
+
+    @Override
+    public Mensalidade salvar(Mensalidade mensalidade) {
+        MensalidadeEntity mensalidadeEntity = mensalidadeEntityMapper.toEntity(mensalidade);
+        MensalidadeEntity novaMensalidade = mensalidadeRepository.save(mensalidadeEntity);
+
+        return mensalidadeEntityMapper.toDomain(novaMensalidade);
+    }
+
+    @Override
+    public List<Mensalidade> listarMensalidadesFiltro(ListarAlunosMensalidadeFilter filter){
+        Specification<MensalidadeEntity> spec = MensalidadeSpecification.filtrarPor(filter);
+        return MensalidadeEntityMapper.toDomainList(mensalidadeRepository.findAll(spec, Sort.by(Sort.Order.asc("dataVencimento"))));
+    }
+
+    @Override
+    public long contarMensalidadePendentesOuAtrasadas(Aluno aluno) {
+        return mensalidadeRepository
+                .countByAlunoAndStatusPagamentoIn(
+                        AlunoEntityMapper.toEntity(aluno),
+                        List.of(StatusPagamento.PENDENTE, StatusPagamento.ATRASADO)
+                );
+    }
+
+    @Override
+    public int contarMensalidadeComDesconto() {
+        return mensalidadeRepository.countMensalidadeComDesconto();
+    }
+
+    @Override
+    public List<RelatorioMensalidade> gerarRelatorioMensalidadePorMes() {
+        return mensalidadeRepository.gerarRelatorioMensalidadePorMes()
+                .stream()
+                .map(dto -> new RelatorioMensalidade(
+                        dto.mes(),
+                        dto.atrasados(),
+                        dto.pagos(),
+                        dto.pagos_com_desconto()
+                ))
+                .toList();
+    }
+
+    @Override
+    public Optional<Mensalidade> buscarMensalidadePorId(Long id){
+        Optional<MensalidadeEntity> mensalidade = mensalidadeRepository.findById(Integer.valueOf(id.toString()));
+
+        return mensalidade.map(MensalidadeEntityMapper::toDomain);
+    };
+
+    @Override
+    public List<Mensalidade> buscarMensalidadesPendentesOuAtrasadasPorAluno(Aluno aluno) {
+        return mensalidadeRepository
+                .findByAlunoAndStatusPagamentoInOrderByDataVencimentoAsc(
+                        AlunoEntityMapper.toEntity(aluno),
+                        List.of(StatusPagamento.PENDENTE, StatusPagamento.ATRASADO)
+                )
+                .stream()
+                .map(MensalidadeEntityMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<Mensalidade> buscarMensalidadePorIdEVencimento(FiltroMensalidadeDTO payload) {
+        Specification<MensalidadeEntity> spec = MensalidadeSpecification.hasAlunoIdAndDataBetween(payload.idAluno(), payload.dateFrom(), payload.dateTo());
+        return MensalidadeEntityMapper.toDomainList(mensalidadeRepository.findAll(spec, Sort.by(Sort.Order.asc("dataVencimento"))));
+    }
+
+    @Override
+    public List<Mensalidade> buscarTodasMensalidadesFutura() {
+        LocalDate hoje = LocalDate.now();
+        String dataVencimento = hoje.withMonth(hoje.getMonthValue() + 1).withDayOfMonth(1).format(DateTimeFormatter.ISO_LOCAL_DATE);
+
+        Specification<MensalidadeEntity> spec = MensalidadeSpecification.hasDataPagamentoGreatherThan(dataVencimento);
+        return MensalidadeEntityMapper.toDomainList(mensalidadeRepository.findAll(spec, Sort.by(Sort.Order.asc("dataVencimento"))));
+    }
+}

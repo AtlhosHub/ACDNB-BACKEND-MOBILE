@@ -1,0 +1,56 @@
+package com.teste.acdnb.infrastructure.persistence.jpa.aluno.specification;
+
+import com.teste.acdnb.core.domain.mensalidade.enums.StatusPagamento;
+import com.teste.acdnb.infrastructure.filter.ListarAlunosMensalidadeFilter;
+import com.teste.acdnb.infrastructure.persistence.jpa.mensalidade.MensalidadeEntity;
+import org.springframework.data.jpa.domain.Specification;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class MensalidadeSpecification {
+    private static final String STATUS = "statusPagamento";
+    private static final List<StatusPagamento> TODOS_STATUS = List.of(StatusPagamento.values());
+    private static final String DATA_VENCIMENTO = "dataVencimento";
+
+    private MensalidadeSpecification() {}
+
+    public static Specification<MensalidadeEntity> filtrarPor(ListarAlunosMensalidadeFilter listarAlunosMensalidadeFilter) {
+        return hasStatusIn(listarAlunosMensalidadeFilter.status()).and(
+                hasDataEnvioFrom(listarAlunosMensalidadeFilter.dataEnvioFrom())
+        ).and(
+                hasDataEnvioTo(listarAlunosMensalidadeFilter.dataEnvioTo())
+        );
+    }
+
+    public static Specification<MensalidadeEntity> hasAlunoIdAndDataBetween(Long alunoId, String dataEnvioFrom, String dataEnvioTo) {
+        return hasAlunoId(alunoId)
+                .and(hasDataEnvioFrom(dataEnvioFrom))
+                .and(hasDataEnvioTo(dataEnvioTo));
+    }
+
+    private static Specification<MensalidadeEntity> hasStatusIn(List<String> status) {
+        return ((root, query, cb) -> (status == null || status.isEmpty()) ? root.get(STATUS).in(TODOS_STATUS) : root.get(STATUS).in(status));
+    }
+
+    private static Specification<MensalidadeEntity> hasAlunoId(Long alunoId) {
+        return (root, query, cb) -> (alunoId == null)
+                ? cb.conjunction()
+                : cb.equal(root.get("aluno").get("id"), alunoId);
+    }
+
+    private static Specification<MensalidadeEntity> hasDataEnvioFrom(String dataEnvioFrom) {
+        return ((root, query, cb) -> (dataEnvioFrom == null || dataEnvioFrom.isEmpty()) ? cb.conjunction() : cb.greaterThanOrEqualTo(root.get(DATA_VENCIMENTO), LocalDate.parse(dataEnvioFrom)));
+    }
+
+    private static Specification<MensalidadeEntity> hasDataEnvioTo(String dataEnvioTo) {
+        return ((root, query, cb) -> (dataEnvioTo == null || dataEnvioTo.isEmpty()) ? cb.conjunction() : cb.lessThanOrEqualTo(root.get(DATA_VENCIMENTO), LocalDate.parse(dataEnvioTo)));
+    }
+
+    public static Specification<MensalidadeEntity> hasDataPagamentoGreatherThan(String dataPagamento) {
+        return ((root, query, cb) ->
+                (dataPagamento == null || dataPagamento.isEmpty())
+                        ? cb.conjunction()
+                        : cb.greaterThan(root.get(DATA_VENCIMENTO), LocalDate.parse(dataPagamento)));
+    }
+}

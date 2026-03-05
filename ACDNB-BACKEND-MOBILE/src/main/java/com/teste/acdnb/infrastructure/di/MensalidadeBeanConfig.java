@@ -1,0 +1,60 @@
+package com.teste.acdnb.infrastructure.di;
+
+import com.teste.acdnb.core.application.gateway.AlunoGateway;
+import com.teste.acdnb.core.application.gateway.mensalidade.ComprovanteGateway;
+import com.teste.acdnb.core.application.gateway.mensalidade.MensalidadeGateway;
+import com.teste.acdnb.core.application.gateway.mensalidade.ValorMensalidadeGateway;
+import com.teste.acdnb.core.application.usecase.mensalidade.*;
+import com.teste.acdnb.core.application.usecase.mensalidade.entities.valorMensalidade.AdicionarValorMensalidade;
+import com.teste.acdnb.core.application.usecase.mensalidade.entities.valorMensalidade.AdicionarValorMensalidadeImpl;
+import com.teste.acdnb.core.application.usecase.mensalidade.entities.valorMensalidade.BuscarValorMensalidadeAtual;
+import com.teste.acdnb.core.application.usecase.mensalidade.entities.valorMensalidade.BuscarValorMensalidadeAtualImpl;
+import com.teste.acdnb.infrastructure.filter.FiltroMensalidadeDTO;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.amqp.core.Queue;
+
+@Configuration
+public class MensalidadeBeanConfig {
+    @Bean
+    public GerarRelatorioMensalidadePorMes gerarRelatorioMensalidadePorMes(@Qualifier("mensalidadeRepositoryGateway") MensalidadeGateway mensalidadeGateway) {
+        return new GerarRelatorioMensalidadePorMesImpl(mensalidadeGateway);
+    }
+
+    @Bean
+    public BuscarHistoricoMensalidade buscarHistoricoMensalidade(@Qualifier("mensalidadeRepositoryGateway") MensalidadeGateway mensalidadeGateway) {
+        return new BuscarHistoricoMensalidadeImpl(mensalidadeGateway);
+    }
+
+    @Bean
+    public ContarMensalidadeComDesconto contarMensalidadeComDesconto(@Qualifier("mensalidadeRepositoryGateway") MensalidadeGateway mensalidadeGateway) {
+        return new ContarMensalidadeComDescontoImpl(mensalidadeGateway);
+    }
+
+    @Bean
+    public AtualizarMensalidade atualizarMensalidade(@Qualifier("mensalidadeRepositoryGateway") MensalidadeGateway mensalidadeGateway, ValorMensalidadeGateway valorMensalidadeGateway) {
+        return new AtualizarMensalidadeImpl(valorMensalidadeGateway, mensalidadeGateway);
+    }
+
+    @Bean
+    public BuscarValorMensalidadeAtual buscarValorMensalidadeAtual(ValorMensalidadeGateway valorMensalidadeGateway) {
+        return new BuscarValorMensalidadeAtualImpl(valorMensalidadeGateway);
+    }
+
+    @Bean
+    public AdicionarValorMensalidade adicionarValorMensalidade(ValorMensalidadeGateway valorMensalidadeGateway){
+        return new AdicionarValorMensalidadeImpl(valorMensalidadeGateway);
+    }
+
+    @Value("${app.rabbitmq.queue.comprovante:fila-comprovante-processado}")
+    private String queueName;
+
+    @Bean
+    public Queue comprovanteQueue() {
+        return new Queue(queueName, true);
+    }
+
+
+}
