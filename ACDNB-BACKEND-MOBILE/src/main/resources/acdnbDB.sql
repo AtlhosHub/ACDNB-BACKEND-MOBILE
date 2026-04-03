@@ -140,6 +140,13 @@ CREATE TABLE nivel(
     descricao VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE observacao(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(300) NOT NULL,
+    aluno_id INT,
+    FOREIGN KEY(aluno_id) REFERENCES aluno(id)
+);
+
 insert into usuario
     (nome, email, senha, celular, data_nascimento, data_inclusao)
 values
@@ -206,6 +213,12 @@ VALUES
     ('Julio Thomas Peixoto', 'julio_thomas_peixoto@gmail.com', '1974-06-12', '38544057829', '27.755.336-2', 'Masculino', '(15)99812-7129', 'Brasileira', 'Itapetininga', '(15) 3610-5532', 'Chef de Cozinha', true, true, null, true, 9, '2025-06-01 09:00:00', 3),
     ('Samuel Martin Fogaça', 'samuel.martin.fogaca@outlook.com', '1965-03-26', '39023853830', '42.596.317-2', 'Masculino', '(16)99122-7178', 'Brasileira', 'São Carlos', null, 'Analista de Dados', true, true, null, true, 10, '2025-06-01 09:00:00', 4);
 --
+INSERT INTO observacao(descricao, aluno_id)
+VALUES
+    ('Aluno 1 está com dificuldades no saque', 1),
+    ('Aluno 2 tem problemas para defender', 2),
+    ('Aluno 3 tem pouca resistência', 3),
+    ('Aluno 4 só falta', 4);
 
 -- Aluno ID 1
 INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2025-10-12', 'PENDENTE', false);
