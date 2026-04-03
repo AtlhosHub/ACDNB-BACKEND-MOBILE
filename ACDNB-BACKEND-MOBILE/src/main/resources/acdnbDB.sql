@@ -65,8 +65,10 @@ CREATE TABLE aluno(
     data_inclusao DATE NOT NULL,
     endereco_id INT,
     usuario_inclusao_id INT,
+    nivel_id INT,
     FOREIGN KEY (endereco_id) REFERENCES endereco(id),
-    FOREIGN KEY (usuario_inclusao_id) REFERENCES usuario(id)
+    FOREIGN KEY (usuario_inclusao_id) REFERENCES usuario(id),
+    FOREIGN KEY (nivel_id) REFERENCES nivel(id)
 );
 
 CREATE TABLE responsavel_aluno(
@@ -133,6 +135,11 @@ CREATE TABLE mensalidade(
     FOREIGN KEY (comprovante_id) REFERENCES comprovante(id)
 );
 
+CREATE TABLE nivel(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(50) NOT NULL
+);
+
 insert into usuario
     (nome, email, senha, celular, data_nascimento, data_inclusao)
 values
@@ -178,19 +185,26 @@ VALUES
     ('Rua Antônio Fernando Arruda Moraes', 670, 'Vila Arruda', 'Itapetininga', 'SP', '18212-110'),
     ('Rua João Batista Carri', 949, 'Parque Residencial Maria Stella Faga', 'São Carlos', 'SP', '13568-410');
 --
-INSERT INTO aluno
-    (nome, email, data_nascimento, cpf, rg, genero, celular, nacionalidade, naturalidade, telefone, profissao, ativo, atestado, deficiencia, autorizado, endereco_id, data_inclusao)
+INSERT INTO nivel(descricao)
 VALUES
-    ('Giovanna Julia Assis', 'giovanna-assis81@gmail.com', '1979-06-09', '14389008803', '10.036.757-4', 'Feminino', '(17)98171-3456', 'Brasileira', 'Bebedouro', null, 'Engenheira de Software', true, true, 'Daltonismo', true, 1, '2025-06-01 09:00:00'),
-    ('Yuri Enrico Thales Duarte', 'yuri_duarte@gmail.com', '1989-03-17', '08582254849', '11.874.451-3', 'Masculino', '(11)98755-1988', 'Brasileira', 'São Paulo', '(11) 2635-2938', 'Técnico de Enfermagem', true, true, null, true, 2, '2025-06-01 09:00:00'),
-    ('Lucca Raimundo dos Santos', 'lucca.raimundo.dossantos@outlook.com', '1999-06-02', '08499656838', '26.150.856-8', 'Masculino', '(11)99574-1639', 'Brasileira', 'Itapevi', '(11) 2783-6298', 'Marceneiro', true, true, null, true, 3, '2025-06-01 09:00:00'),
-    ('Sérgio Manuel Márcio da Mata', 'sergio_damata@hotmail.com', '1997-08-25', '18053949835', '48.206.398-1', 'Masculino', '(14)99518-6976', 'Brasileira', 'Bauru', '(14) 3630-6113', 'Estagiário', true, true, null, true, 4, '2025-06-01 09:00:00'),
-    ('Carlos Eduardo Iago Ramos', 'carloseduardoramos@outlook.com', '1960-07-02', '07195674835', '15.526.220-8', 'Masculino', '(11)99788-5434', 'Brasileira', 'São Paulo', null, 'Designer Gráfico', true, true,'Perda auditiva parcial', true, 5, '2025-06-01 09:00:00'),
-    ('Bruna Stefany Almeida', 'bruna.stefany.almeida@gmail.com', '1990-02-06', '63192900806', '48.688.760-1', 'Feminino', '(15)98726-7162', 'Brasileira', 'Sorocaba', '(15) 2625-4607', 'Pintora', true, true, null, true, 6, '2025-06-01 09:00:00'),
-    ('Osvaldo Joaquim Julio Lopes', 'osvaldojoaquimlopes@hotmail.com', '2002-06-06', '58373390863', '22.492.238-5', 'Masculino', '(11)98748-1114', 'Brasileira', 'São Paulo', '(11) 2534-6517', 'Professor', true, true, 'Baixa visão', true, 7, '2025-06-01 09:00:00'),
-    ('Lorena Rebeca Eliane Monteiro', 'lorena.rebeca.monteiro@hotmail.com', '1967-04-07', '39173602841', '33.813.771-3', 'Feminino', '(11)98619-7210', 'Brasileira', 'São Paulo', '(11) 2653-5312', 'Arquiteta', true, true, null, true, 8, '2025-06-01 09:00:00'),
-    ('Julio Thomas Peixoto', 'julio_thomas_peixoto@gmail.com', '1974-06-12', '38544057829', '27.755.336-2', 'Masculino', '(15)99812-7129', 'Brasileira', 'Itapetininga', '(15) 3610-5532', 'Chef de Cozinha', true, true, null, true, 9, '2025-06-01 09:00:00'),
-    ('Samuel Martin Fogaça', 'samuel.martin.fogaca@outlook.com', '1965-03-26', '39023853830', '42.596.317-2', 'Masculino', '(16)99122-7178', 'Brasileira', 'São Carlos', null, 'Analista de Dados', true, true, null, true, 10, '2025-06-01 09:00:00');
+    ('Iniciante'),
+    ('Intermediário'),
+    ('Avançado'),
+    ('Profissional');
+--
+INSERT INTO aluno
+    (nome, email, data_nascimento, cpf, rg, genero, celular, nacionalidade, naturalidade, telefone, profissao, ativo, atestado, deficiencia, autorizado, endereco_id, data_inclusao, nivel_id)
+VALUES
+    ('Giovanna Julia Assis', 'giovanna-assis81@gmail.com', '1979-06-09', '14389008803', '10.036.757-4', 'Feminino', '(17)98171-3456', 'Brasileira', 'Bebedouro', null, 'Engenheira de Software', true, true, 'Daltonismo', true, 1, '2025-06-01 09:00:00', 1),
+    ('Yuri Enrico Thales Duarte', 'yuri_duarte@gmail.com', '1989-03-17', '08582254849', '11.874.451-3', 'Masculino', '(11)98755-1988', 'Brasileira', 'São Paulo', '(11) 2635-2938', 'Técnico de Enfermagem', true, true, null, true, 2, '2025-06-01 09:00:00', 1),
+    ('Lucca Raimundo dos Santos', 'lucca.raimundo.dossantos@outlook.com', '1999-06-02', '08499656838', '26.150.856-8', 'Masculino', '(11)99574-1639', 'Brasileira', 'Itapevi', '(11) 2783-6298', 'Marceneiro', true, true, null, true, 3, '2025-06-01 09:00:00', 1),
+    ('Sérgio Manuel Márcio da Mata', 'sergio_damata@hotmail.com', '1997-08-25', '18053949835', '48.206.398-1', 'Masculino', '(14)99518-6976', 'Brasileira', 'Bauru', '(14) 3630-6113', 'Estagiário', true, true, null, true, 4, '2025-06-01 09:00:00', 2),
+    ('Carlos Eduardo Iago Ramos', 'carloseduardoramos@outlook.com', '1960-07-02', '07195674835', '15.526.220-8', 'Masculino', '(11)99788-5434', 'Brasileira', 'São Paulo', null, 'Designer Gráfico', true, true,'Perda auditiva parcial', true, 5, '2025-06-01 09:00:00',2),
+    ('Bruna Stefany Almeida', 'bruna.stefany.almeida@gmail.com', '1990-02-06', '63192900806', '48.688.760-1', 'Feminino', '(15)98726-7162', 'Brasileira', 'Sorocaba', '(15) 2625-4607', 'Pintora', true, true, null, true, 6, '2025-06-01 09:00:00', 2),
+    ('Osvaldo Joaquim Julio Lopes', 'osvaldojoaquimlopes@hotmail.com', '2002-06-06', '58373390863', '22.492.238-5', 'Masculino', '(11)98748-1114', 'Brasileira', 'São Paulo', '(11) 2534-6517', 'Professor', true, true, 'Baixa visão', true, 7, '2025-06-01 09:00:00',3),
+    ('Lorena Rebeca Eliane Monteiro', 'lorena.rebeca.monteiro@hotmail.com', '1967-04-07', '39173602841', '33.813.771-3', 'Feminino', '(11)98619-7210', 'Brasileira', 'São Paulo', '(11) 2653-5312', 'Arquiteta', true, true, null, true, 8, '2025-06-01 09:00:00', 3),
+    ('Julio Thomas Peixoto', 'julio_thomas_peixoto@gmail.com', '1974-06-12', '38544057829', '27.755.336-2', 'Masculino', '(15)99812-7129', 'Brasileira', 'Itapetininga', '(15) 3610-5532', 'Chef de Cozinha', true, true, null, true, 9, '2025-06-01 09:00:00', 3),
+    ('Samuel Martin Fogaça', 'samuel.martin.fogaca@outlook.com', '1965-03-26', '39023853830', '42.596.317-2', 'Masculino', '(16)99122-7178', 'Brasileira', 'São Carlos', null, 'Analista de Dados', true, true, null, true, 10, '2025-06-01 09:00:00', 4);
 --
 
 -- Aluno ID 1
