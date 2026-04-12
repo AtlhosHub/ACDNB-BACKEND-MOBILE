@@ -4,9 +4,11 @@ import com.teste.acdnb.core.application.exception.DataConflictException;
 import com.teste.acdnb.core.application.exception.InvalidDataException;
 import com.teste.acdnb.core.application.exception.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -45,5 +47,20 @@ public class ControllerHandler {
         );
 
         return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        Map<String, String> fields = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error -> fields.put(error.getField(), error.getDefaultMessage()));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", java.time.LocalDateTime.now());
+        response.put("status", 400);
+        response.put("error", "Bad Request");
+        response.put("message", "Dados de entrada invalidos");
+        response.put("fields", fields);
+
+        return ResponseEntity.badRequest().body(response);
     }
 }

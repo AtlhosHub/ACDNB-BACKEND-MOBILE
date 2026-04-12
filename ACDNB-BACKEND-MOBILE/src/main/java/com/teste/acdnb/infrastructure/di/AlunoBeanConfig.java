@@ -17,6 +17,11 @@ public class AlunoBeanConfig {
         return new MensalidadeFactory();
     }
 
+    @Bean
+    public AdicionarAlunoUseCase adicionarAlunoUseCase(AlunoGateway alunoGateway) {
+        return new AdicionarAlunoUseCaseImpl(alunoGateway);
+    }
+
 //    @Bean
 //    public AdicionarAlunoUseCase adicionarAlunoUseCase(AlunoGateway alunoGateway, ValorMensalidadeGateway valorMensalidadeGateway, MensalidadeFactory mensalidadeFactory, MensalidadeGateway mensalidadeGateway, ProdutorMensagem produtorMensagem) {
 //        return new AdicionarAlunoUseCaseImpl(alunoGateway, valorMensalidadeGateway, mensalidadeFactory, mensalidadeGateway, produtorMensagem);
