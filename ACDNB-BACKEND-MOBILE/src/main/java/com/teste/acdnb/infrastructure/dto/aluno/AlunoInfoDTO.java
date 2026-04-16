@@ -1,6 +1,7 @@
 package com.teste.acdnb.infrastructure.dto.aluno;
 
 import com.teste.acdnb.core.domain.aluno.Endereco;
+import com.teste.acdnb.core.domain.aluno.Nivel;
 import com.teste.acdnb.core.domain.aluno.Responsavel;
 
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public record AlunoInfoDTO (
     boolean autorizado,
     LocalDateTime dataInclusao,
     Endereco endereco,
-    List<Responsavel> responsaveis
+    List<Responsavel> responsaveis,
+    Nivel nivel
 //    int usuarioInclusao
 ){}

@@ -27,17 +27,17 @@ public class AlunoController {
 //    private final AdicionarAlunoUseCase adicionarAlunoUseCase;
 //    private final ListarAlunosUseCase listarAlunosUseCase;
 //    private final DeletarAlunoUseCase deletarAlunoUseCase;
-//    private final BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase;
+    private final BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase;
 //    private final AtualizarAlunoUseCase atualizarAlunoUseCase;
 //    private final ListarAniversariosUseCase listarAniversariosUseCase;
 //    private final QtdAlunosAtivosUseCase qtdAlunosAtivosUseCase;
     private final ListarAlunosMensalidades listarAlunosMensalidades;
-
     private final MensalidadeRepository mensalidadeRepository;
 
-    public AlunoController( ListarAlunosMensalidades listarAlunosMensalidades, MensalidadeRepository mensalidadeRepository) {
+    public AlunoController( ListarAlunosMensalidades listarAlunosMensalidades, MensalidadeRepository mensalidadeRepository, BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase) {
         this.listarAlunosMensalidades = listarAlunosMensalidades;
         this.mensalidadeRepository = mensalidadeRepository;
+        this.buscarAlunoPorIdUseCase = buscarAlunoPorIdUseCase;
     }
 
 
@@ -49,5 +49,11 @@ public class AlunoController {
         PaginacaoResponse<AlunoComprovanteDTO> response = new PaginacaoResponse<>(alunosComComprovantes, filtro.offset(), filtro.limit(), totalItems);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AlunoInfoDTO> buscarAlunoPorId(@PathVariable int id){
+        AlunoInfoDTO aluno = buscarAlunoPorIdUseCase.execute(id);
+        return ResponseEntity.ok(aluno);
     }
 }

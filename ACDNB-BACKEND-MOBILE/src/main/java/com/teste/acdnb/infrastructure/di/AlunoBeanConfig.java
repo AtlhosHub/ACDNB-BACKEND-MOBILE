@@ -32,10 +32,10 @@ public class AlunoBeanConfig {
 //        return new DeletarAlunoUseCaseImpl(alunoGateway);
 //    }
 //
-//    @Bean
-//    public BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase(AlunoGateway alunoGateway) {
-//        return new BuscarAlunoPorIdUseCaseImpl(alunoGateway);
-//    }
+    @Bean
+    public BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase(AlunoGateway alunoGateway) {
+        return new BuscarAlunoPorIdUseCaseImpl(alunoGateway);
+    }
 
 //    @Bean
 //    public AtualizarAlunoUseCase atualizarAlunoUseCase(

@@ -2,7 +2,7 @@ package com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.teste.acdnb.infrastructure.persistence.jpa.mensalidade.MensalidadeEntity;
-import com.teste.acdnb.infrastructure.persistence.jpa.usuario.UsuarioEntity;
+import com.teste.acdnb.infrastructure.persistence.jpa.nivel.NivelEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -112,4 +112,9 @@ public class AlunoEntity {
     public boolean isMenor(){
         return Period.between(dataNascimento, LocalDate.now()).getYears() < 18;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "nivel_id")
+    @Schema(description = "Nivel do aluno")
+    private NivelEntity nivel;
 }
