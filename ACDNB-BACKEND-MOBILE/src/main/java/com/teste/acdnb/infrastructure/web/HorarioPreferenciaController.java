@@ -4,6 +4,8 @@ package com.teste.acdnb.infrastructure.web;
 import com.teste.acdnb.core.application.usecase.horarioPreferencia.*;
 import com.teste.acdnb.core.domain.horarioPreferencia.HorarioPreferencia;
 import com.teste.acdnb.infrastructure.dto.HorarioPreferenciaDTO;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/horario-preferencia")
+@SecurityRequirement(name = "Bearer")
+@Tag(name = "HorarioPreferenciaController", description = "Endpoints para gerenciar os horários de preferência dos intererssados no sistema")
 public class HorarioPreferenciaController {
 
     private final AdicionarHorarioPreferenciaUseCase adicionarHorarioPreferenciaUseCase;

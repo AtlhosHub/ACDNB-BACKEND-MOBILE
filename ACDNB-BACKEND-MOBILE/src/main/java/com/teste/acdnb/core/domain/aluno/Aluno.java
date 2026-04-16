@@ -35,10 +35,11 @@ public class Aluno {
     private List<Responsavel> responsaveis = new ArrayList<>();
     private Usuario usuarioInclusao;
     private List<Mensalidade> mensalidades = new ArrayList<>();
+    private Nivel nivel;
 
     public Aluno() {}
 
-    public Aluno(int id, Nome nome, Email email, DataNascimento dataNascimento, Cpf cpf, String rg, NomeSocial nomeSocial, String genero, Celular celular, Telefone telefone, String nacionalidade, String naturalidade, String profissao, String deficiencia, boolean ativo, boolean atestado, boolean autorizado, DataInclusao dataInclusao, Endereco endereco, List<Responsavel> responsaveis, List<Mensalidade> mensalidades) {
+    public Aluno(int id, Nome nome, Email email, DataNascimento dataNascimento, Cpf cpf, String rg, NomeSocial nomeSocial, String genero, Celular celular, Telefone telefone, String nacionalidade, String naturalidade, String profissao, String deficiencia, boolean ativo, boolean atestado, boolean autorizado, DataInclusao dataInclusao, Endereco endereco, List<Responsavel> responsaveis, List<Mensalidade> mensalidades, Nivel nivel) {
         this.dataNascimento = dataNascimento;
         if(isMenor() && (responsaveis == null || responsaveis.isEmpty())){
             throw new IllegalArgumentException("Alunos menores de idade devem ter pelo menos um responsável.");
@@ -69,6 +70,7 @@ public class Aluno {
         this.responsaveis = responsaveis;
 //        this.usuarioInclusao = usuarioInclusao;
         this.mensalidades = mensalidades;
+        this.nivel = nivel;
     }
 
     public boolean isMenor(){
@@ -261,5 +263,13 @@ public class Aluno {
 
     public void setMensalidades(List<Mensalidade> mensalidades) {
         this.mensalidades = mensalidades;
+    }
+
+    public Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = nivel;
     }
 }

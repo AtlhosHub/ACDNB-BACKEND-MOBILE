@@ -25,7 +25,6 @@ public class UsuarioEntityMapper {
         entity.setDataInclusao(usuario.getDataInclusao() != null ? usuario.getDataInclusao().getValue() : null);
         entity.setTokenRecuperacaoSenha(entity.getTokenRecuperacaoSenha() != null ? entity.getTokenRecuperacaoSenha() : null);
         entity.setTokenExpiracao(entity.getTokenExpiracao() != null ? entity.getTokenExpiracao() : null);
-
 //        if (usuario.getUsuarioInclusao() != null) {
 //            UsuarioEntity usuarioInclusaoEntity = new UsuarioEntity();
 //            usuarioInclusaoEntity.setId(usuario.getUsuarioInclusao().getId());
