@@ -300,6 +300,21 @@ INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status
 INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2026-02-12', 'PENDENTE', false);
 INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2026-03-12', 'PENDENTE', false);
 
+-- LISTA ESPERA
+INSERT INTO lista_espera
+(nome, email, celular, data_nascimento, nome_social, genero, telefone, data_inclusao, data_interesse, horario_preferencia_id, usuario_inclusao_id)
+VALUES
+    ('João Silva Santos', 'joao.silva@email.com', '11987654321', '1995-03-15', null, 'Masculino', '11934567890', NOW(), NOW(), 1, 1),
+    ('Maria Oliveira Costa', 'maria.oliveira@email.com', '11998765432', '1998-07-22', null, 'Feminino', null, NOW(), NOW(), 2, 1),
+    ('Carlos Mendes Rocha', 'carlos.mendes@email.com', '11976543210', '2000-11-08', null, 'Masculino', '2137894561', NOW(), NOW(), 3, 1),
+    ('Ana Paula Ferreira', 'ana.paula@email.com', '11987650123', '1992-01-30', null, 'Feminino', null, NOW(), NOW(), 1, 1),
+    ('Roberto Gomes Silva', 'roberto.gomes@email.com', '11992345678', '1985-05-12', null, 'Masculino', '1125678901', NOW(), NOW(), 2, 1),
+    ('Fernanda Santos Alves', 'fernanda.santos@email.com', '11989012345', '1997-09-18', null, 'Feminino', null, NOW(), NOW(), 1, 1),
+    ('Lucas David Martins', 'lucas.martins@email.com', '11995678901', '1996-02-28', null, 'Masculino', '3132345678', NOW(), NOW(), 3, 1),
+    ('Juliana Carmo Duarte', 'juliana.carmo@email.com', '11978901234', '1994-11-05', null, 'Feminino', null, NOW(), NOW(), 2, 1),
+    ('Pedro Oliveira Lima', 'pedro.oliveira@email.com', '11982345678', '1999-04-10', null, 'Masculino', '8534567890', NOW(), NOW(), 1, 1),
+    ('Camila Ribeiro Costa', 'camila.ribeiro@email.com', '11990123456', '1993-08-25', null, 'Feminino', null, NOW(), NOW(), 3, 1),
+    ('Lucas Pereira Costa', 'lucas.costa@email.com', '11981234567', '1992-07-21', null, 'Masculino', '1134567890', NOW(), NOW(), 1, 1);
 
 -- insert into valor_mensalidade
 --     (data_inclusao, valor, desconto, manual_flag)
