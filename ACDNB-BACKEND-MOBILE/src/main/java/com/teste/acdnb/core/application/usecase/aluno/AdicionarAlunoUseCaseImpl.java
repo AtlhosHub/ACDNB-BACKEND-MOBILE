@@ -2,8 +2,10 @@ package com.teste.acdnb.core.application.usecase.aluno;
 
 import com.teste.acdnb.core.application.exception.DataConflictException;
 import com.teste.acdnb.core.application.gateway.AlunoGateway;
+import com.teste.acdnb.core.application.gateway.NivelGateway;
 import com.teste.acdnb.core.domain.aluno.Aluno;
 import com.teste.acdnb.core.domain.aluno.Endereco;
+import com.teste.acdnb.core.domain.aluno.Nivel;
 import com.teste.acdnb.core.domain.aluno.Responsavel;
 import com.teste.acdnb.core.domain.aluno.valueobject.Cep;
 import com.teste.acdnb.core.domain.shared.valueobject.*;
@@ -16,21 +18,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class AdicionarAlunoUseCaseImpl implements AdicionarAlunoUseCase {
-
     private final AlunoGateway alunoGateway;
+    private final NivelGateway nivelGateway;
 
-    public AdicionarAlunoUseCaseImpl(AlunoGateway alunoGateway) {
+    public AdicionarAlunoUseCaseImpl(AlunoGateway alunoGateway, NivelGateway nivelGateway) {
         this.alunoGateway = alunoGateway;
+        this.nivelGateway = nivelGateway;
     }
 
     @Override
     public Aluno execute(AlunoDTO alunoDTO) {
-        // Verificar duplicidade de email, CPF e RG
         if (alunoGateway.existsByEmailIgnoreCaseOrCpfOrRg(alunoDTO.email(), alunoDTO.cpf(), alunoDTO.rg())) {
             throw new DataConflictException("Email, CPF ou RG já cadastrados no sistema");
         }
 
-        // Processar endereço (reutilizar se já existir)
         Endereco enderecoDomain = new Endereco(
             0,
             alunoDTO.endereco().logradouro(),
@@ -45,7 +46,6 @@ public class AdicionarAlunoUseCaseImpl implements AdicionarAlunoUseCase {
         Optional<Endereco> enderecoExistente = alunoGateway.findEndereco(enderecoDomain);
         Endereco endereco = enderecoExistente.orElseGet(() -> alunoGateway.saveEndereco(enderecoDomain));
 
-        // Processar responsáveis (se aluno for menor de idade)
         List<Responsavel> responsaveisProcessados = new ArrayList<>();
         if (alunoDTO.responsaveis() != null && !alunoDTO.responsaveis().isEmpty()) {
             for (ResponsavelDTO respDTO : alunoDTO.responsaveis()) {
@@ -69,9 +69,13 @@ public class AdicionarAlunoUseCaseImpl implements AdicionarAlunoUseCase {
             }
         }
 
-        // Montar objeto domínio Aluno com construtor completo
+        Optional<Nivel> optionalNivelAluno = nivelGateway.buscarPorId(alunoDTO.nivel());
+        if(!optionalNivelAluno.isPresent()) {
+            throw new DataConflictException("Nivel de aluno não encontrado");
+        }
+
         Aluno aluno = new Aluno(
-            0, // id será gerado pelo banco
+            0,
             Nome.of(alunoDTO.nome()),
             Email.of(alunoDTO.email(), alunoDTO.dataNascimento() != null),
             DataNascimento.of(alunoDTO.dataNascimento()),
@@ -91,7 +95,8 @@ public class AdicionarAlunoUseCaseImpl implements AdicionarAlunoUseCase {
             DataInclusao.of(alunoDTO.dataInclusao() != null ? alunoDTO.dataInclusao() : LocalDateTime.now()),
             endereco,
             responsaveisProcessados,
-            new ArrayList<>()
+            new ArrayList<>(),
+            optionalNivelAluno.get()
         );
 
         return alunoGateway.salvarAluno(aluno);

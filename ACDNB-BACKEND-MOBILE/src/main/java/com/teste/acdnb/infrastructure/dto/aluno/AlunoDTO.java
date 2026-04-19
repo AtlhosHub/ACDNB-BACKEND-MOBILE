@@ -47,6 +47,7 @@ public record AlunoDTO(
         boolean ativo,
         boolean atestado,
         boolean autorizado,
+        Integer nivel,
         LocalDateTime dataInclusao,
 
         @Valid

@@ -7,6 +7,7 @@ import com.teste.acdnb.infrastructure.persistence.jpa.nivel.NivelRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class NiveRepositorylGateway implements NivelGateway {
@@ -25,5 +26,10 @@ public class NiveRepositorylGateway implements NivelGateway {
                 .stream()
                 .map(NivelEntityMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public Optional<Nivel> buscarPorId(Integer id) {
+        return nivelRepository.findById(id).map(NivelEntityMapper::toDomain);
     }
 }

@@ -3,6 +3,7 @@ package com.teste.acdnb.infrastructure.gateway;
 import com.teste.acdnb.core.application.gateway.AlunoGateway;
 import com.teste.acdnb.core.domain.aluno.Aluno;
 import com.teste.acdnb.core.domain.aluno.Endereco;
+import com.teste.acdnb.core.domain.aluno.Nivel;
 import com.teste.acdnb.core.domain.aluno.Responsavel;
 import com.teste.acdnb.infrastructure.filter.ListarAlunosMensalidadeFilter;
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.AlunoEntity;
@@ -14,6 +15,8 @@ import com.teste.acdnb.infrastructure.persistence.jpa.aluno.repository.AlunoRepo
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.repository.EnderecoRepository;
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.repository.ResponsavelRepository;
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.specification.AlunoSpecification;
+import com.teste.acdnb.infrastructure.persistence.jpa.nivel.NivelEntityMapper;
+import com.teste.acdnb.infrastructure.persistence.jpa.nivel.NivelRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -25,13 +28,14 @@ import java.util.Optional;
 @Component
 public class AlunoRepositoryGateway implements AlunoGateway {
     private final AlunoRepository alunoRepository;
+    private final NivelRepository nivelRepository;
     private final EnderecoRepository enderecoRepository;
     private final ResponsavelRepository responsavelRepository;
-
     private final AlunoEntityMapper alunoEntityMapper;
 
-    public AlunoRepositoryGateway(AlunoRepository alunoRepository, EnderecoRepository enderecoRepository, ResponsavelRepository responsavelRepository, AlunoEntityMapper alunoEntityMapper) {
+    public AlunoRepositoryGateway(AlunoRepository alunoRepository, EnderecoRepository enderecoRepository, ResponsavelRepository responsavelRepository, AlunoEntityMapper alunoEntityMapper, NivelRepository nivelRepository) {
         this.alunoRepository = alunoRepository;
+        this.nivelRepository = nivelRepository;
         this.enderecoRepository = enderecoRepository;
         this.responsavelRepository = responsavelRepository;
         this.alunoEntityMapper = alunoEntityMapper;
