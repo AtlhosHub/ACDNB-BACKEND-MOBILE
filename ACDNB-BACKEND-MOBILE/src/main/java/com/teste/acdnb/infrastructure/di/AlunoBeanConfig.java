@@ -1,6 +1,7 @@
 package com.teste.acdnb.infrastructure.di;
 
 import com.teste.acdnb.core.application.gateway.AlunoGateway;
+import com.teste.acdnb.core.application.gateway.NivelGateway;
 import com.teste.acdnb.core.application.gateway.mensalidade.MensalidadeGateway;
 import com.teste.acdnb.core.application.gateway.mensalidade.ValorMensalidadeGateway;
 import com.teste.acdnb.core.application.usecase.aluno.*;
@@ -15,6 +16,11 @@ public class AlunoBeanConfig {
     @Bean
     public MensalidadeFactory mensalidadeFactory() {
         return new MensalidadeFactory();
+    }
+
+    @Bean
+    public AdicionarAlunoUseCase adicionarAlunoUseCase(AlunoGateway alunoGateway, NivelGateway nivelGateway) {
+        return new AdicionarAlunoUseCaseImpl(alunoGateway, nivelGateway);
     }
 
 //    @Bean

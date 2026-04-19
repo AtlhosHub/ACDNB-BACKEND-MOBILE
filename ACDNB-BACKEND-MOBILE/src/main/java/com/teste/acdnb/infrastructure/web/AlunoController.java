@@ -24,7 +24,7 @@ import java.util.Optional;
 @SecurityRequirement(name = "Bearer")
 @Tag(name = "AlunoController", description = "Endpoints para gerenciar os alunos no sistema")
 public class AlunoController {
-//    private final AdicionarAlunoUseCase adicionarAlunoUseCase;
+    private final AdicionarAlunoUseCase adicionarAlunoUseCase;
 //    private final ListarAlunosUseCase listarAlunosUseCase;
 //    private final DeletarAlunoUseCase deletarAlunoUseCase;
     private final BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase;
@@ -34,12 +34,19 @@ public class AlunoController {
     private final ListarAlunosMensalidades listarAlunosMensalidades;
     private final MensalidadeRepository mensalidadeRepository;
 
-    public AlunoController( ListarAlunosMensalidades listarAlunosMensalidades, MensalidadeRepository mensalidadeRepository, BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase) {
+    public AlunoController(AdicionarAlunoUseCase adicionarAlunoUseCase, ListarAlunosMensalidades listarAlunosMensalidades, MensalidadeRepository mensalidadeRepository, BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase) {
         this.listarAlunosMensalidades = listarAlunosMensalidades;
+        this.adicionarAlunoUseCase = adicionarAlunoUseCase;
         this.mensalidadeRepository = mensalidadeRepository;
         this.buscarAlunoPorIdUseCase = buscarAlunoPorIdUseCase;
     }
 
+
+    @PostMapping
+    public ResponseEntity<Aluno> adicionarAluno(@Valid @RequestBody AlunoDTO alunoDTO) {
+        Aluno alunoCadastrado = adicionarAlunoUseCase.execute(alunoDTO);
+        return ResponseEntity.status(201).body(alunoCadastrado);
+    }
 
     @PostMapping("/comprovantes")
     public ResponseEntity<PaginacaoResponse<AlunoComprovanteDTO>> listarAlunosComComprovantes(@RequestBody ListarAlunosMensalidadeFilter filtro) {
