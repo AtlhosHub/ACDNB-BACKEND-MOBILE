@@ -304,17 +304,17 @@ INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status
 INSERT INTO lista_espera
 (nome, email, celular, data_nascimento, nome_social, genero, telefone, data_inclusao, data_interesse, horario_preferencia_id, usuario_inclusao_id)
 VALUES
-    ('João Silva Santos', 'joao.silva@email.com', '11987654321', '1995-03-15', null, 'Masculino', '11934567890', NOW(), NOW(), 1, 1),
-    ('Maria Oliveira Costa', 'maria.oliveira@email.com', '11998765432', '1998-07-22', null, 'Feminino', null, NOW(), NOW(), 2, 1),
-    ('Carlos Mendes Rocha', 'carlos.mendes@email.com', '11976543210', '2000-11-08', null, 'Masculino', '2137894561', NOW(), NOW(), 3, 1),
-    ('Ana Paula Ferreira', 'ana.paula@email.com', '11987650123', '1992-01-30', null, 'Feminino', null, NOW(), NOW(), 1, 1),
-    ('Roberto Gomes Silva', 'roberto.gomes@email.com', '11992345678', '1985-05-12', null, 'Masculino', '1125678901', NOW(), NOW(), 2, 1),
-    ('Fernanda Santos Alves', 'fernanda.santos@email.com', '11989012345', '1997-09-18', null, 'Feminino', null, NOW(), NOW(), 1, 1),
-    ('Lucas David Martins', 'lucas.martins@email.com', '11995678901', '1996-02-28', null, 'Masculino', '3132345678', NOW(), NOW(), 3, 1),
-    ('Juliana Carmo Duarte', 'juliana.carmo@email.com', '11978901234', '1994-11-05', null, 'Feminino', null, NOW(), NOW(), 2, 1),
-    ('Pedro Oliveira Lima', 'pedro.oliveira@email.com', '11982345678', '1999-04-10', null, 'Masculino', '8534567890', NOW(), NOW(), 1, 1),
-    ('Camila Ribeiro Costa', 'camila.ribeiro@email.com', '11990123456', '1993-08-25', null, 'Feminino', null, NOW(), NOW(), 3, 1),
-    ('Lucas Pereira Costa', 'lucas.costa@email.com', '11981234567', '1992-07-21', null, 'Masculino', '1134567890', NOW(), NOW(), 1, 1);
+    ('João Silva Santos', 'joao.silva@email.com', '11987654321', '1995-03-15', null, 'Masculino', '11934567890', '2024-01-01 08:15:00', '2024-01-01 08:15:00', 1, 1),
+    ('Maria Oliveira Costa', 'maria.oliveira@email.com', '11998765432', '1998-07-22', null, 'Feminino', null, '2024-01-02 09:30:00', '2024-01-02 09:30:00', 2, 1),
+    ('Carlos Mendes Rocha', 'carlos.mendes@email.com', '11976543210', '2000-11-08', null, 'Masculino', '2137894561', '2024-01-03 10:45:00', '2024-01-03 10:45:00', 3, 1),
+    ('Ana Paula Ferreira', 'ana.paula@email.com', '11987650123', '1992-01-30', null, 'Feminino', null, '2024-01-04 11:00:00', '2024-01-04 11:00:00', 1, 1),
+    ('Roberto Gomes Silva', 'roberto.gomes@email.com', '11992345678', '1985-05-12', null, 'Masculino', '1125678901', '2024-01-05 13:20:00', '2024-01-05 13:20:00', 2, 1),
+    ('Fernanda Santos Alves', 'fernanda.santos@email.com', '11989012345', '1997-09-18', null, 'Feminino', null, '2024-01-06 14:10:00', '2024-01-06 14:10:00', 1, 1),
+    ('Lucas David Martins', 'lucas.martins@email.com', '11995678901', '1996-02-28', null, 'Masculino', '3132345678', '2024-01-07 15:35:00', '2024-01-07 15:35:00', 3, 1),
+    ('Juliana Carmo Duarte', 'juliana.carmo@email.com', '11978901234', '1994-11-05', null, 'Feminino', null, '2024-01-08 16:50:00', '2024-01-08 16:50:00', 2, 1),
+    ('Pedro Oliveira Lima', 'pedro.oliveira@email.com', '11982345678', '1999-04-10', null, 'Masculino', '8534567890', '2024-01-09 17:25:00', '2024-01-09 17:25:00', 1, 1),
+    ('Camila Ribeiro Costa', 'camila.ribeiro@email.com', '11990123456', '1993-08-25', null, 'Feminino', null, '2024-01-10 18:40:00', '2024-01-10 18:40:00', 3, 1),
+    ('Lucas Pereira Costa', 'lucas.costa@email.com', '11981234567', '1992-07-21', null, 'Masculino', '1134567890', '2024-01-11 19:55:00', '2024-01-11 19:55:00', 1, 1);
 
 -- insert into valor_mensalidade
 --     (data_inclusao, valor, desconto, manual_flag)
