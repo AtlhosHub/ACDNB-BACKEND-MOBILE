@@ -7,6 +7,7 @@ import com.teste.acdnb.infrastructure.dto.ListaEsperaDTO;
 import com.teste.acdnb.infrastructure.dto.PaginacaoResponse;
 import com.teste.acdnb.infrastructure.dto.aluno.AlunoComprovanteDTO;
 import com.teste.acdnb.infrastructure.filter.InteressadosFilter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lista-espera")
+@SecurityRequirement(name = "Bearer")
 @Tag(name = "ListaEsperaController", description = "Endpoints para gerenciar interessados na lista de espera")
 public class ListaEsperaController {
 
