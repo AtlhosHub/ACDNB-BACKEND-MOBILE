@@ -1,5 +1,6 @@
 package com.teste.acdnb.core.domain.listaEspera;
 
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
 import com.teste.acdnb.core.domain.horarioPreferencia.HorarioPreferencia;
 import com.teste.acdnb.core.domain.shared.valueobject.*;
 import com.teste.acdnb.core.domain.usuario.Usuario;
@@ -17,11 +18,12 @@ public class ListaEspera {
     private DataInclusao dataInclusao;
     private Usuario usuarioInclusao;
     private HorarioPreferencia horarioPref;
+    private Endereco endereco;
 
     public ListaEspera() {
     }
 
-    public ListaEspera(int id, Nome nome, Email email, DataInclusao dataInteresse, Celular celular, NomeSocial nomeSocial, String genero, DataNascimento dataNascimento, Telefone telefone, DataInclusao dataInclusao, Usuario usuarioInclusao, HorarioPreferencia horarioPref) {
+    public ListaEspera(int id, Nome nome, Email email, DataInclusao dataInteresse, Celular celular, NomeSocial nomeSocial, String genero, DataNascimento dataNascimento, Telefone telefone, DataInclusao dataInclusao, Usuario usuarioInclusao, HorarioPreferencia horarioPref, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -34,6 +36,7 @@ public class ListaEspera {
         this.dataInclusao = dataInclusao;
         this.usuarioInclusao = usuarioInclusao;
         this.horarioPref = horarioPref;
+        this.endereco = endereco;
     }
 
     public int getId() {
@@ -131,5 +134,13 @@ public class ListaEspera {
 
     public void setHorarioPref(HorarioPreferencia horarioPref) {
         this.horarioPref = horarioPref;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

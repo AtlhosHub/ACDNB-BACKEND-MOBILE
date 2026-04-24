@@ -1,8 +1,8 @@
 package com.teste.acdnb.infrastructure.dto.aluno;
 
-import com.teste.acdnb.core.domain.aluno.Endereco;
 import com.teste.acdnb.core.domain.aluno.Nivel;
 import com.teste.acdnb.core.domain.aluno.Responsavel;
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -2,9 +2,12 @@ package com.teste.acdnb.infrastructure.gateway;
 
 import com.teste.acdnb.core.application.gateway.ListaEsperaGateway;
 import com.teste.acdnb.core.domain.listaEspera.ListaEspera;
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
 import com.teste.acdnb.infrastructure.filter.InteressadosFilter;
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.AlunoEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.specification.AlunoSpecification;
+import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoEntityMapper;
+import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoRepository;
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaEntityMapper;
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaRepository;
@@ -15,15 +18,19 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ListaEsperaRepositoryGateway implements ListaEsperaGateway {
     private final ListaEsperaRepository listaEsperaRepository;
+    private final EnderecoRepository enderecoRepository;
     private final ListaEsperaEntityMapper listaEsperaEntityMapper;
 
-    public ListaEsperaRepositoryGateway(ListaEsperaRepository listaEsperaRepository,
-                                        ListaEsperaEntityMapper listaEsperaEntityMapper) {
+    public ListaEsperaRepositoryGateway(ListaEsperaRepository listaEsperaRepository, EnderecoRepository enderecoRepository, ListaEsperaEntityMapper listaEsperaEntityMapper) {
         this.listaEsperaRepository = listaEsperaRepository;
+        this.enderecoRepository = enderecoRepository;
         this.listaEsperaEntityMapper = listaEsperaEntityMapper;
     }
 
@@ -80,6 +87,34 @@ public class ListaEsperaRepositoryGateway implements ListaEsperaGateway {
 
         ListaEsperaEntity updated = listaEsperaRepository.save(entity);
         return listaEsperaEntityMapper.toDomain(updated);
+    }
+
+    @Override
+    public Optional<Endereco> findEndereco(Endereco endereco){
+        return enderecoRepository.findByLogradouroAndNumLogAndBairroAndCidadeAndCepAndEstado(
+                endereco.getLogradouro(),
+                endereco.getNumLog(),
+                endereco.getBairro(),
+                endereco.getCidade(),
+                endereco.getCep().getValue(),
+                endereco.getEstado()
+        ).map(EnderecoEntityMapper::toDomain);
+    }
+
+    @Override
+    public Endereco saveEndereco(Endereco endereco){
+        return EnderecoEntityMapper.toDomain(enderecoRepository.save(EnderecoEntityMapper.toEntity(endereco)));
+    }
+
+    @Override
+    public Map<String, Long> interessadosPorCidade() {
+        return listaEsperaRepository.findAll().stream()
+                .filter(e -> e.getEndereco() != null)
+                .filter(e -> e.getEndereco().getCidade() != null)
+                .collect(Collectors.groupingBy(
+                        e -> e.getEndereco().getCidade(),
+                        Collectors.counting()
+                ));
     }
 
 }

@@ -1,8 +1,7 @@
 package com.teste.acdnb.infrastructure.dto.aluno;
 
-import com.teste.acdnb.core.domain.aluno.Endereco;
 import com.teste.acdnb.core.domain.aluno.Responsavel;
-import com.teste.acdnb.core.domain.usuario.Usuario;
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,8 @@
-package com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity;
+package com.teste.acdnb.infrastructure.persistence.jpa.endereco;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.AlunoEntity;
+import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,7 +46,12 @@ public class EnderecoEntity {
     private String cep;
 
     @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("endereco")
+    @JsonIgnoreProperties({"endereco"})
     @Schema(description = "Lista de alunos associados ao endereço")
     private List<AlunoEntity> alunos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("endereco")
+    @Schema(description = "Lista de interessados associados ao endereço")
+    private List<ListaEsperaEntity> interessados = new ArrayList<>();
 }
