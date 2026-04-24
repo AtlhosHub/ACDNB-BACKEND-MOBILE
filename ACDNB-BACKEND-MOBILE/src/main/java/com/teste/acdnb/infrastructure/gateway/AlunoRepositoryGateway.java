@@ -146,4 +146,6 @@ public class AlunoRepositoryGateway implements AlunoGateway {
         return alunoRepository.findByEmailOrEmailResponsavel(email)
                 .map(AlunoEntityMapper::toDomain);
     }
+
+
 }
