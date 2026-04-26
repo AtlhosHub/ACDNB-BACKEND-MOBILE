@@ -24,22 +24,25 @@ import java.util.Optional;
 @SecurityRequirement(name = "Bearer")
 @Tag(name = "AlunoController", description = "Endpoints para gerenciar os alunos no sistema")
 public class AlunoController {
-//    private final AdicionarAlunoUseCase adicionarAlunoUseCase;
-//    private final ListarAlunosUseCase listarAlunosUseCase;
-//    private final DeletarAlunoUseCase deletarAlunoUseCase;
     private final BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase;
-//    private final AtualizarAlunoUseCase atualizarAlunoUseCase;
-//    private final ListarAniversariosUseCase listarAniversariosUseCase;
-//    private final QtdAlunosAtivosUseCase qtdAlunosAtivosUseCase;
+    private final ListarAniversariosUseCase listarAniversariosUseCase;
+    private final QtdAlunosAtivosUseCase qtdAlunosAtivosUseCase;
     private final ListarAlunosMensalidades listarAlunosMensalidades;
     private final MensalidadeRepository mensalidadeRepository;
 
-    public AlunoController( ListarAlunosMensalidades listarAlunosMensalidades, MensalidadeRepository mensalidadeRepository, BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase) {
+    public AlunoController(QtdAlunosAtivosUseCase qtdAlunosAtivosUseCase, ListarAniversariosUseCase listarAniversariosUseCase, ListarAlunosMensalidades listarAlunosMensalidades, MensalidadeRepository mensalidadeRepository, BuscarAlunoPorIdUseCase buscarAlunoPorIdUseCase) {
         this.listarAlunosMensalidades = listarAlunosMensalidades;
         this.mensalidadeRepository = mensalidadeRepository;
         this.buscarAlunoPorIdUseCase = buscarAlunoPorIdUseCase;
+        this.listarAniversariosUseCase = listarAniversariosUseCase;
+        this.qtdAlunosAtivosUseCase = qtdAlunosAtivosUseCase;
     }
 
+    @GetMapping("/totalAtivo")
+    public ResponseEntity<Integer> buscarTotalAtivo() {
+        Integer qtdAlunosAtivo = qtdAlunosAtivosUseCase.execute();
+        return ResponseEntity.status(201).body(qtdAlunosAtivo);
+    }
 
     @PostMapping("/comprovantes")
     public ResponseEntity<PaginacaoResponse<AlunoComprovanteDTO>> listarAlunosComComprovantes(@RequestBody ListarAlunosMensalidadeFilter filtro) {
@@ -55,5 +58,11 @@ public class AlunoController {
     public ResponseEntity<AlunoInfoDTO> buscarAlunoPorId(@PathVariable int id){
         AlunoInfoDTO aluno = buscarAlunoPorIdUseCase.execute(id);
         return ResponseEntity.ok(aluno);
+    }
+
+    @GetMapping("/aniversariantes")
+    public ResponseEntity<List<AlunoAniversarioDTO>> listarAniversarios() {
+        List<AlunoAniversarioDTO> aniversariantes = listarAniversariosUseCase.execute();
+        return aniversariantes.isEmpty() ? ResponseEntity.ok(List.of()) : ResponseEntity.ok(aniversariantes);
     }
 }
