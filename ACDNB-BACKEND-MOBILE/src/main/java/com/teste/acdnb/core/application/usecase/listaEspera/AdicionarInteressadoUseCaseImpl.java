@@ -11,6 +11,9 @@ import com.teste.acdnb.infrastructure.persistence.jpa.usuario.UsuarioEntityMappe
 import com.teste.acdnb.infrastructure.persistence.jpa.usuario.UsuarioRepository;
 import com.teste.acdnb.infrastructure.util.DateParser;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 public class AdicionarInteressadoUseCaseImpl implements AdicionarInteressadoUseCase {
 
     private final ListaEsperaGateway listaEsperaGateway;
@@ -47,6 +50,22 @@ public class AdicionarInteressadoUseCaseImpl implements AdicionarInteressadoUseC
             interessado.setUsuarioInclusao(usuarioEntityMapper.toDomain(usuarioEntity));
         }
 
+        // Processar endereço (reutilizar se já existir)
+        Endereco enderecoDomain = new Endereco(
+                0,
+                dto.endereco().getLogradouro(),
+                dto.endereco().getNumLog(),
+                dto.endereco().getBairro(),
+                dto.endereco().getCidade(),
+                dto.endereco().getEstado(),
+                (dto.endereco().getCep()),
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
+
+        Optional<Endereco> enderecoExistente = listaEsperaGateway.findEndereco(enderecoDomain);
+        Endereco endereco = enderecoExistente.orElseGet(() -> listaEsperaGateway.saveEndereco(enderecoDomain));
+        interessado.setEndereco(endereco);
 
         if (dto.horarioPrefId() != null) {
             HorarioPreferencia horarioPrefExistente = horarioPreferenciaGateway.buscarPorId(dto.horarioPrefId());

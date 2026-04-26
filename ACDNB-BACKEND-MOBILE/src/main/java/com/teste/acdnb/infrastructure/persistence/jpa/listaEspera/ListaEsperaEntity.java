@@ -1,5 +1,7 @@
 package com.teste.acdnb.infrastructure.persistence.jpa.listaEspera;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.horarioPreferencia.HorarioPreferenciaEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.usuario.UsuarioEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -66,5 +68,11 @@ public class ListaEsperaEntity {
     @ManyToOne
     @JoinColumn(name = "usuario_inclusao_id")
     private UsuarioEntity usuarioInclusao;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    @JsonIgnoreProperties("interessados")
+    @Schema(description = "Endereço associado ao interessado")
+    private EnderecoEntity endereco;
 
 }

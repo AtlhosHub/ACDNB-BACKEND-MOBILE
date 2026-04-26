@@ -1,4 +1,4 @@
-package com.teste.acdnb.core.domain.aluno.valueobject;
+package com.teste.acdnb.core.domain.shared.valueobject;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

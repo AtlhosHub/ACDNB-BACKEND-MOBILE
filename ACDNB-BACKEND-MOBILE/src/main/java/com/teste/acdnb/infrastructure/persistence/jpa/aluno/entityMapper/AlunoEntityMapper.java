@@ -3,6 +3,7 @@ package com.teste.acdnb.infrastructure.persistence.jpa.aluno.entityMapper;
 import com.teste.acdnb.core.domain.aluno.Aluno;
 import com.teste.acdnb.core.domain.shared.valueobject.*;
 import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.AlunoEntity;
+import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoEntityMapper;
 import com.teste.acdnb.infrastructure.persistence.jpa.nivel.NivelEntityMapper;
 import com.teste.acdnb.infrastructure.persistence.jpa.usuario.UsuarioEntityMapper;
 import org.springframework.stereotype.Component;

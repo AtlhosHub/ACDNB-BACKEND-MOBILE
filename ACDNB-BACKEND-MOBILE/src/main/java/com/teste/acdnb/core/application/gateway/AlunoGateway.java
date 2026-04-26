@@ -1,7 +1,7 @@
 package com.teste.acdnb.core.application.gateway;
 
 import com.teste.acdnb.core.domain.aluno.Aluno;
-import com.teste.acdnb.core.domain.aluno.Endereco;
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
 import com.teste.acdnb.core.domain.aluno.Responsavel;
 import com.teste.acdnb.infrastructure.filter.ListarAlunosMensalidadeFilter;
 

@@ -1,8 +1,7 @@
-package com.teste.acdnb.infrastructure.persistence.jpa.aluno.entityMapper;
+package com.teste.acdnb.infrastructure.persistence.jpa.endereco;
 
-import com.teste.acdnb.core.domain.aluno.Endereco;
-import com.teste.acdnb.core.domain.aluno.valueobject.Cep;
-import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.EnderecoEntity;
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
+import com.teste.acdnb.core.domain.shared.valueobject.Cep;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +19,7 @@ public class EnderecoEntityMapper {
             endereco.getCidade(),
             endereco.getEstado(),
             endereco.getCep().getValue(),
+            null,
             null
 //            AlunoMapperUtil.toEntityList(endereco.getAlunos(), new AlunoEntityMapper(null, this, null))
         );
@@ -34,6 +34,7 @@ public class EnderecoEntityMapper {
             enderecoEntity.getCidade(),
             enderecoEntity.getEstado(),
             Cep.of(enderecoEntity.getCep()),
+            null,
             null
 //            AlunoMapperUtil.toDomainList(enderecoEntity.getAlunos(), new AlunoEntityMapper(null, this, null))
         );
