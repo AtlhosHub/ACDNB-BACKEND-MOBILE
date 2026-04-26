@@ -155,7 +155,8 @@ values
 insert into valor_mensalidade
     (data_inclusao, valor, desconto, manual_flag)
 values
-    (now(), 120.00, false, false);
+    (now(), 120.00, false, false),
+    (now(), 110.00, true, false);
 
 insert into horario_preferencia
     (horario_aula_inicio, horario_aula_fim, data_inclusao)
@@ -220,85 +221,75 @@ VALUES
     ('Aluno 3 tem pouca resistência', 3),
     ('Aluno 4 só falta', 4);
 
--- Aluno ID 1
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (1, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 1
+INSERT INTO mensalidade VALUES (false, 1, null, '2026-01-10', 1, 1, 1, '2026-01-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 1, null, '2026-02-10', 1, 2, 2, '2026-02-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 1, null, '2026-03-10', 1, 3, 2, '2026-03-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 1, null, '2026-04-10', 1, 4, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 1, null, '2026-05-10', 1, 5, 1, null, 'PENDENTE');
 
--- Aluno ID 2
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (2, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (2, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (2, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (2, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (2, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (2, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 2
+INSERT INTO mensalidade VALUES (false, 2, null, '2026-01-10', 1, 6, 1, '2026-01-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 2, null, '2026-02-10', 1, 7, 2, '2026-02-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 2, null, '2026-03-10', 1, 8, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 2, null, '2026-04-10', 1, 9, 2, '2026-04-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 2, null, '2026-05-10', 1, 10, 1, null, 'PENDENTE');
 
--- Aluno ID 3
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (3, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (3, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (3, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (3, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (3, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (3, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 3
+INSERT INTO mensalidade VALUES (false, 3, null, '2026-01-10', 1, 11, 2, '2026-01-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 3, null, '2026-02-10', 1, 12, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 3, null, '2026-03-10', 1, 13, 2, '2026-03-07', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 3, null, '2026-04-10', 1, 14, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 3, null, '2026-05-10', 1, 15, 2, '2026-05-09', 'PAGO');
 
--- Aluno ID 4
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (4, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (4, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (4, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (4, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (4, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (4, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 4
+INSERT INTO mensalidade VALUES (false, 4, null, '2026-01-10', 1, 16, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 4, null, '2026-02-10', 1, 17, 2, '2026-02-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 4, null, '2026-03-10', 1, 18, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 4, null, '2026-04-10', 1, 19, 2, '2026-04-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 4, null, '2026-05-10', 1, 20, 1, null, 'PENDENTE');
 
--- Aluno ID 5
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (5, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (5, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (5, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (5, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (5, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (5, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 5
+INSERT INTO mensalidade VALUES (false, 5, null, '2026-01-10', 1, 21, 2, '2026-01-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 5, null, '2026-02-10', 1, 22, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 5, null, '2026-03-10', 1, 23, 2, '2026-03-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 5, null, '2026-04-10', 1, 24, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 5, null, '2026-05-10', 1, 25, 2, '2026-05-09', 'PAGO');
 
--- Aluno ID 6
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (6, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (6, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (6, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (6, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (6, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (6, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 6
+INSERT INTO mensalidade VALUES (false, 6, null, '2026-01-10', 1, 26, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 6, null, '2026-02-10', 1, 27, 2, '2026-02-07', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 6, null, '2026-03-10', 1, 28, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 6, null, '2026-04-10', 1, 29, 2, '2026-04-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 6, null, '2026-05-10', 1, 30, 1, null, 'PENDENTE');
 
--- Aluno ID 7
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (7, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (7, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (7, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (7, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (7, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (7, 1, '2026-02-12', 'PENDENTE', false);
+-- Aluno 7
+INSERT INTO mensalidade VALUES (false, 7, null, '2026-01-10', 1, 31, 2, '2026-01-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 7, null, '2026-02-10', 1, 32, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 7, null, '2026-03-10', 1, 33, 2, '2026-03-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 7, null, '2026-04-10', 1, 34, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 7, null, '2026-05-10', 1, 35, 2, '2026-05-08', 'PAGO');
 
--- Aluno ID 8
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (8, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (8, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (8, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (8, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (8, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (8, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 8
+INSERT INTO mensalidade VALUES (false, 8, null, '2026-01-10', 1, 36, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 8, null, '2026-02-10', 1, 37, 2, '2026-02-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 8, null, '2026-03-10', 1, 38, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 8, null, '2026-04-10', 1, 39, 2, '2026-04-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 8, null, '2026-05-10', 1, 40, 1, null, 'PENDENTE');
 
--- Aluno ID 9
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (9, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (9, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (9, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (9, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (9, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (9, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 9
+INSERT INTO mensalidade VALUES (false, 9, null, '2026-01-10', 1, 41, 2, '2026-01-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 9, null, '2026-02-10', 1, 42, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 9, null, '2026-03-10', 1, 43, 2, '2026-03-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 9, null, '2026-04-10', 1, 44, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 9, null, '2026-05-10', 1, 45, 2, '2026-05-09', 'PAGO');
 
--- Aluno ID 10
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2025-10-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2025-11-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2025-12-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2026-01-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2026-02-12', 'PENDENTE', false);
-INSERT INTO mensalidade (aluno_id, valor_mensalidade_id, data_vencimento, status_pagamento, alteracao_automatica) VALUES (10, 1, '2026-03-12', 'PENDENTE', false);
+-- Aluno 10
+INSERT INTO mensalidade VALUES (false, 10, null, '2026-01-10', 1, 46, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 10, null, '2026-02-10', 1, 47, 2, '2026-02-08', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 10, null, '2026-03-10', 1, 48, 1, null, 'ATRASADO');
+INSERT INTO mensalidade VALUES (false, 10, null, '2026-04-10', 1, 49, 2, '2026-04-09', 'PAGO');
+INSERT INTO mensalidade VALUES (false, 10, null, '2026-05-10', 1, 50, 1, null, 'PENDENTE');
 
 -- LISTA ESPERA
 INSERT INTO lista_espera
