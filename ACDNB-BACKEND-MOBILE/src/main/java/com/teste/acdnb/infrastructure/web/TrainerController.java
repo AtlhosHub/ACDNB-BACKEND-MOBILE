@@ -46,8 +46,8 @@ public class TrainerController {
                             .collect(Collectors.toList());
 
                     String nivel = aluno.getNivel() != null
-                            ? aluno.getNivel().toString()
-                            : "Beginner";
+                            ? aluno.getNivel().getDescricao()
+                            : null;
 
                     return new AIChatDTO.AlunoResumoDTO(
                             aluno.getId(),

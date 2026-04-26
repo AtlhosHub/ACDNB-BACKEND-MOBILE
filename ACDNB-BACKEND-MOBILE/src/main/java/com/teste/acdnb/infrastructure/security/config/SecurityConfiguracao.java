@@ -55,7 +55,6 @@ public class SecurityConfiguracao {
             "/h2-console/**",
             "/error/**",
             "/resetPassword/**"
-            //"/trainer/**"
     };
 
     @Bean
