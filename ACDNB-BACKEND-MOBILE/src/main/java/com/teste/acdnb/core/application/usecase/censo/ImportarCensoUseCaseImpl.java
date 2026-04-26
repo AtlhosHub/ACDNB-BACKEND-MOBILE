@@ -22,13 +22,14 @@ public class ImportarCensoUseCaseImpl implements ImportarCensoUseCase {
             Censo dado_censo = new Censo();
 
             dado_censo.setId(dado.id());
-            dado_censo.setNome_distrito(dado.nome_distrito());
+            dado_censo.setNome_municipio(dado.nome_municipio());
             dado_censo.setNum_responsaveis(dado.num_responsaveis());
             dado_censo.setNum_habitantes(dado.num_habitantes());
             dado_censo.setVar_num_habitantes(dado.num_habitantes());
             dado_censo.setRenda_media_responsavel(dado.renda_media_responsavel());
             dado_censo.setVar_renda_responsavel(dado.var_renda_responsavel());
-            dado_censo.setNome_cidade(dado.nome_cidade());
+            dado_censo.setLatitude(dado.latitude());
+            dado_censo.setLongitude(dado.longitude());
             dado_censo.setDataInclusao(DataInclusao.of(LocalDateTime.now()));
 
             censoGateway.salvarCenso(dado_censo);

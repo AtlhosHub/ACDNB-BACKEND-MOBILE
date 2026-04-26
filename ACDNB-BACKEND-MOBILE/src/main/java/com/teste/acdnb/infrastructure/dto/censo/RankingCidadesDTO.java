@@ -1,7 +1,9 @@
 package com.teste.acdnb.infrastructure.dto.censo;
 
 public record RankingCidadesDTO(
+        Integer rank,
         String nome,
-        Double score,
-        String idCidade
+        Double points,
+        Float latitude,
+        Float longitude
 ){}

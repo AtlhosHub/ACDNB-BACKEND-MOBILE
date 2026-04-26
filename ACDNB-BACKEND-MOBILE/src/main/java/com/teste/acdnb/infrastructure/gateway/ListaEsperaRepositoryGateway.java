@@ -4,8 +4,6 @@ import com.teste.acdnb.core.application.gateway.ListaEsperaGateway;
 import com.teste.acdnb.core.domain.listaEspera.ListaEspera;
 import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
 import com.teste.acdnb.infrastructure.filter.InteressadosFilter;
-import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.AlunoEntity;
-import com.teste.acdnb.infrastructure.persistence.jpa.aluno.specification.AlunoSpecification;
 import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoEntityMapper;
 import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoRepository;
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaEntity;
@@ -14,8 +12,8 @@ import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaRep
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
+import com.teste.acdnb.infrastructure.util.TextUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -112,7 +110,7 @@ public class ListaEsperaRepositoryGateway implements ListaEsperaGateway {
                 .filter(e -> e.getEndereco() != null)
                 .filter(e -> e.getEndereco().getCidade() != null)
                 .collect(Collectors.groupingBy(
-                        e -> e.getEndereco().getCidade(),
+                        e -> TextUtils.normalizarCidade(e.getEndereco().getCidade()),
                         Collectors.counting()
                 ));
     }

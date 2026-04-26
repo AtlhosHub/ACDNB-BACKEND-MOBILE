@@ -19,10 +19,10 @@ import java.time.LocalDateTime;
 @Setter
 public class CensoEntity {
     @Id
-    @Schema(description = "Código do distrito")
+    @Schema(description = "Código do municipio")
     private String id;
-    @Schema(description = "Nome do distrito")
-    private String nome_distrito;
+    @Schema(description = "Nome do municipio")
+    private String nome_municipio;
     @Schema(description = "Número de pessoas responsáveis em domicílios particulares permanentes ocupados")
     private Float num_responsaveis;
     @Schema(description = "Número de moradores em domicílios particulares permanentes ocupados")
@@ -33,8 +33,10 @@ public class CensoEntity {
     private Float renda_media_responsavel;
     @Schema(description = "Variância do rendimento nominal mensal das pessoas responsáveis com rendimentos por domicílios particulares permanentes ocupados")
     private Float var_renda_responsavel;
-    @Schema(description = "Nome da cidade")
-    private String nome_cidade;
+    @Schema(description = "Coordenada de latitude do municipio")
+    private Float latitude;
+    @Schema(description = "Coordenada de longitude do municipio")
+    private Float longitude;
     @Schema(description = "Data de inclusão do dado")
     private LocalDateTime dataInclusao;
 }

@@ -4,26 +4,28 @@ import com.teste.acdnb.core.domain.shared.valueobject.DataInclusao;
 
 public class Censo {
     private String id;
-    private String nome_distrito;
+    private String nome_municipio;
     private Float num_responsaveis;
     private Float num_habitantes;
     private Float var_num_habitantes;
     private Float renda_media_responsavel;
     private Float var_renda_responsavel;
-    private String nome_cidade;
+    private Float latitude;
+    private Float longitude;
     private DataInclusao dataInclusao;
 
     public Censo(){}
 
-    public Censo(String id, String nome_distrito, Float num_responsaveis, Float num_habitantes, Float var_num_habitantes, Float renda_media_responsavel, Float var_renda_responsavel, String nome_cidade, DataInclusao dataInclusao) {
+    public Censo(String id, String nome_municipio, Float num_responsaveis, Float num_habitantes, Float var_num_habitantes, Float renda_media_responsavel, Float var_renda_responsavel, Float latitude, Float longitude, DataInclusao dataInclusao) {
         this.id = id;
-        this.nome_distrito = nome_distrito;
+        this.nome_municipio = nome_municipio;
         this.num_responsaveis = num_responsaveis;
         this.num_habitantes = num_habitantes;
         this.var_num_habitantes = var_num_habitantes;
         this.renda_media_responsavel = renda_media_responsavel;
         this.var_renda_responsavel = var_renda_responsavel;
-        this.nome_cidade = nome_cidade;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.dataInclusao = dataInclusao;
     }
 
@@ -35,12 +37,12 @@ public class Censo {
         this.id = id;
     }
 
-    public String getNome_distrito() {
-        return nome_distrito;
+    public String getNome_municipio() {
+        return nome_municipio;
     }
 
-    public void setNome_distrito(String nome_distrito) {
-        this.nome_distrito = nome_distrito;
+    public void setNome_municipio(String nome_municipio) {
+        this.nome_municipio = nome_municipio;
     }
 
     public Float getNum_responsaveis() {
@@ -83,12 +85,20 @@ public class Censo {
         this.var_renda_responsavel = var_renda_responsavel;
     }
 
-    public String getNome_cidade() {
-        return nome_cidade;
+    public Float getLatitude() {
+        return latitude;
     }
 
-    public void setNome_cidade(String nome_cidade) {
-        this.nome_cidade = nome_cidade;
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
 
     public DataInclusao getDataInclusao() {

@@ -12,13 +12,14 @@ public class CensoEntityMapper {
 
         return new CensoEntity(
                 censo.getId(),
-                censo.getNome_distrito(),
+                censo.getNome_municipio(),
                 censo.getNum_responsaveis(),
                 censo.getNum_habitantes(),
                 censo.getVar_num_habitantes(),
                 censo.getRenda_media_responsavel(),
                 censo.getVar_renda_responsavel(),
-                censo.getNome_cidade(),
+                censo.getLatitude(),
+                censo.getLongitude(),
                 censo.getDataInclusao().getValue()
         );
     }
@@ -28,13 +29,14 @@ public class CensoEntityMapper {
 
         return new Censo(
                 censoEntity.getId(),
-                censoEntity.getNome_distrito(),
+                censoEntity.getNome_municipio(),
                 censoEntity.getNum_responsaveis(),
                 censoEntity.getNum_habitantes(),
                 censoEntity.getVar_num_habitantes(),
                 censoEntity.getRenda_media_responsavel(),
                 censoEntity.getVar_renda_responsavel(),
-                censoEntity.getNome_cidade(),
+                censoEntity.getLatitude(),
+                censoEntity.getLongitude(),
                 DataInclusao.of(censoEntity.getDataInclusao())
         );
     }
@@ -42,13 +44,14 @@ public class CensoEntityMapper {
     public static CensoDTO toDTO(CensoEntity censoEntity) {
         return new CensoDTO(
                 censoEntity.getId(),
-                censoEntity.getNome_distrito(),
+                censoEntity.getNome_municipio(),
                 censoEntity.getNum_responsaveis(),
                 censoEntity.getNum_habitantes(),
                 censoEntity.getVar_num_habitantes(),
                 censoEntity.getRenda_media_responsavel(),
                 censoEntity.getVar_renda_responsavel(),
-                censoEntity.getNome_cidade()
-        );
+                censoEntity.getLatitude(),
+                censoEntity.getLongitude()
+                );
     }
 }
