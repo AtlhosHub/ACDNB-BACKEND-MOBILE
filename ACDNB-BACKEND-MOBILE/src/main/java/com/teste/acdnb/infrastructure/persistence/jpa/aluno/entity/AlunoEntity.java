@@ -1,6 +1,7 @@
 package com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.mensalidade.MensalidadeEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.nivel.NivelEntity;
 import io.swagger.v3.oas.annotations.media.Schema;

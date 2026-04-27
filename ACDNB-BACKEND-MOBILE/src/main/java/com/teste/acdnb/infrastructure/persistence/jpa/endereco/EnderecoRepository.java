@@ -1,6 +1,5 @@
-package com.teste.acdnb.infrastructure.persistence.jpa.aluno.repository;
+package com.teste.acdnb.infrastructure.persistence.jpa.endereco;
 
-import com.teste.acdnb.infrastructure.persistence.jpa.aluno.entity.EnderecoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

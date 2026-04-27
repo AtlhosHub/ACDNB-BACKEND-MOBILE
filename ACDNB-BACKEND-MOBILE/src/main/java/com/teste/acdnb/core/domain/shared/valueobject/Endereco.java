@@ -1,6 +1,7 @@
-package com.teste.acdnb.core.domain.aluno;
+package com.teste.acdnb.core.domain.shared.valueobject;
 
-import com.teste.acdnb.core.domain.aluno.valueobject.Cep;
+import com.teste.acdnb.core.domain.aluno.Aluno;
+import com.teste.acdnb.core.domain.listaEspera.ListaEspera;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,11 @@ public class Endereco {
     private String estado;
     private Cep cep;
     private List<Aluno> alunos = new ArrayList<>();
+    private List<ListaEspera> interessados = new ArrayList<>();
 
     public Endereco(){}
 
-    public Endereco(int id, String logradouro, String numLog, String bairro, String cidade, String estado, Cep cep, List<Aluno> alunos) {
+    public Endereco(int id, String logradouro, String numLog, String bairro, String cidade, String estado, Cep cep, List<Aluno> alunos, List<ListaEspera> interessados) {
         if(logradouro == null || logradouro.isEmpty()){
             throw new IllegalArgumentException("O logradouro não pode ficar em branco");
         }
@@ -45,6 +47,7 @@ public class Endereco {
         this.estado = estado;
         this.cep = cep;
         this.alunos = alunos;
+        this.interessados = interessados;
     }
 
     public int getId() {
@@ -109,5 +112,13 @@ public class Endereco {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+    }
+
+    public List<ListaEspera> getInteressados() {
+        return interessados;
+    }
+
+    public void setInteressados(List<ListaEspera> interessados) {
+        this.interessados = interessados;
     }
 }

@@ -1,5 +1,7 @@
 package com.teste.acdnb.infrastructure.dto;
 
+import com.teste.acdnb.core.domain.shared.valueobject.Endereco;
+
 import java.time.LocalDate;
 
 public record ListaEsperaDTO(
@@ -13,6 +15,7 @@ public record ListaEsperaDTO(
     String telefone,
     String dataInclusao,
     Integer usuarioInclusao,
-    Integer horarioPrefId
+    Integer horarioPrefId,
+    Endereco endereco
 ) {
 }
