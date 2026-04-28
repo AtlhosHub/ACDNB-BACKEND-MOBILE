@@ -50,7 +50,7 @@ public class ListaEsperaController {
     @PostMapping
     public ResponseEntity<PaginacaoResponse<ListaEspera>> listarTodosInteressados(@RequestBody InteressadosFilter filtro) {
         List<ListaEspera> interessados = listarInteressadosUseCase.execute(filtro);
-        int qtdInteressados = listaEsperaGateway.listarTodos().size();
+        int qtdInteressados = listaEsperaGateway.listarTodos(filtro).size();
 
         PaginacaoResponse<ListaEspera> response = new PaginacaoResponse<>(interessados, filtro.offset(), filtro.limit(), qtdInteressados);
 
