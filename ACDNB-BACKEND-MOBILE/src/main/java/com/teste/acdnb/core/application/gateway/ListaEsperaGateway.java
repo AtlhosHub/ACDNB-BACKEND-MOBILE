@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ListaEsperaGateway {
     ListaEspera adicionarInteressado(ListaEspera listaEspera);
     List<ListaEspera> listarFiltro(InteressadosFilter interessadosFilter);
-    List<ListaEspera> listarTodos();
+    List<ListaEspera> listarTodos(InteressadosFilter interessadosFilter);
     ListaEspera buscarPorId(int id);
     void deletarInteressado(int id);
     ListaEspera atualizarInteressado(ListaEspera listaEspera);

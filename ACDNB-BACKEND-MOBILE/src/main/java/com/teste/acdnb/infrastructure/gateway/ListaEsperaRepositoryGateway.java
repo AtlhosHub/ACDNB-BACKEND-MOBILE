@@ -9,9 +9,11 @@ import com.teste.acdnb.infrastructure.persistence.jpa.endereco.EnderecoRepositor
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaEntity;
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaEntityMapper;
 import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.ListaEsperaRepository;
+import com.teste.acdnb.infrastructure.persistence.jpa.listaEspera.specification.ListaEsperaSpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import com.teste.acdnb.infrastructure.util.TextUtils;
 
@@ -40,22 +42,26 @@ public class ListaEsperaRepositoryGateway implements ListaEsperaGateway {
     }
 
     @Override
-    public List<ListaEspera> listarFiltro(InteressadosFilter interessadosFitler) {
+    public List<ListaEspera> listarFiltro(InteressadosFilter interessadosFilter) {
         Pageable pageable = PageRequest.of(
-                interessadosFitler.offset() / interessadosFitler.limit(),
-                interessadosFitler.limit(),
+                interessadosFilter.offset() / interessadosFilter.limit(),
+                interessadosFilter.limit(),
                 Sort.by(Sort.Order.desc("dataInteresse"))
         );
 
-        return listaEsperaRepository.findAll(pageable)
+        Specification<ListaEsperaEntity> spec = ListaEsperaSpecification.filtrarPor(interessadosFilter);
+
+        return listaEsperaRepository.findAll(spec, pageable)
                 .stream()
                 .map(listaEsperaEntityMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public List<ListaEspera> listarTodos() {
-        return listaEsperaRepository.findAll()
+    public List<ListaEspera> listarTodos(InteressadosFilter interessadosFilter) {
+        Specification<ListaEsperaEntity> spec = ListaEsperaSpecification.filtrarPor(interessadosFilter);
+
+        return listaEsperaRepository.findAll(spec)
                 .stream()
                 .map(listaEsperaEntityMapper::toDomain)
                 .toList();
